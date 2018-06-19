@@ -10,7 +10,8 @@ import android.os.Process;
 import com.mparticle.*;
 import com.mparticle.internal.MPUtility;
 import com.mparticle.internal.PushRegistrationHelper;
-import com.mparticle.kits.KitIntegration.AttributeListener;
+import com.mparticle.kits_core.KitIntegration;
+import com.mparticle.kits_core.ReportingMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +22,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-public class AdobeKit extends KitIntegration implements AttributeListener, KitIntegration.PushListener, KitIntegration.ApplicationStateListener {
+public class AdobeKit extends AbstractKitIntegration implements KitIntegration.AttributeListener, KitIntegration.PushListener, KitIntegration.ApplicationStateListener {
 
     private static final String MARKETING_CLOUD_ID_KEY = "mid";
     private static final String ORG_ID_KEY = "organizationID";
@@ -53,7 +54,7 @@ public class AdobeKit extends KitIntegration implements AttributeListener, KitIn
     }
 
     @Override
-    protected List<ReportingMessage> onKitCreate(Map<String, String> map, Context context) throws IllegalArgumentException {
+    public List<ReportingMessage> onKitCreate(Map<String, String> map, Context context) throws IllegalArgumentException {
         mOrgId = map.get(ORG_ID_KEY);
         getMarketingCloudId();
         return null;
